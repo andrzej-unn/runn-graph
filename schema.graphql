@@ -1,0 +1,119 @@
+# Bar
+type Bar @entity {
+  # Contract address
+  id: ID!
+
+  # Decimals
+  decimals: Int!
+
+  # Name
+  name: String!
+
+  # Symbol
+  symbol: String!
+
+  # Total xUNN supply
+  totalSupply: BigDecimal!
+
+  # Ratio xUNN per UNN
+  ratio: BigDecimal!
+
+  # xUNN minted
+  xUNNMinted: BigDecimal!
+
+  # xUNN burned
+  xUNNBurned: BigDecimal!
+
+  # UNN staked
+  UNNStaked: BigDecimal!
+
+  # UNN harvested
+  UNNHarvested: BigDecimal!
+
+  # xUNN age
+  xUNNAge: BigDecimal!
+
+  # xUNN age destroyed
+  xUNNAgeDestroyed: BigDecimal!
+
+  # Users in the bar
+  users: [User!]! @derivedFrom(field: "bar")
+
+  # Updated at
+  updatedAt: BigInt!
+}
+
+# User
+type User @entity {
+  # ID
+  id: ID!
+
+  # Bar
+  bar: Bar
+
+  # xUNN (balance)
+  xUNN: BigDecimal!
+
+  # xUNN In
+  xUNNIn: BigDecimal!
+
+  # xUNN Out
+  xUNNOut: BigDecimal!
+
+  # Minted
+  xUNNMinted: BigDecimal!
+
+  # Burned
+  xUNNBurned: BigDecimal!
+
+  # xUNN offset
+  xUNNOffset: BigDecimal!
+
+  # xUNN age
+  xUNNAge: BigDecimal!
+
+  # xUNN age destroyed
+  xUNNAgeDestroyed: BigDecimal!
+
+  # Staked
+  UNNStaked: BigDecimal!
+
+  # Harvested
+  UNNHarvested: BigDecimal!
+
+  # To get bar pending UNN (xUNN * staked / bar.totalSupply)
+
+  # UNN Out
+  UNNOut: BigDecimal!
+
+  # UNN In
+  UNNIn: BigDecimal!
+
+  # Updated at
+  updatedAt: BigInt!
+
+  # UNN offset
+  UNNOffset: BigDecimal!
+
+  # usd offset
+  usdOffset: BigDecimal!
+}
+
+# History
+enum Timeframe {
+  Day
+}
+
+type History @entity {
+  id: ID!
+  date: Int!
+  timeframe: Timeframe!
+  UNNStaked: BigDecimal!
+  UNNHarvested: BigDecimal!
+  xUNNAge: BigDecimal!
+  xUNNAgeDestroyed: BigDecimal!
+  xUNNMinted: BigDecimal!
+  xUNNBurned: BigDecimal!
+  xUNNSupply: BigDecimal!
+  ratio: BigDecimal!
+}
